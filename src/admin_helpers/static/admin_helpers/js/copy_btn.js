@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const originalText = element.textContent;
         const computedStyle = window.getComputedStyle(element);
         element.style.width = computedStyle.width;
-        // element.style.height = computedStyle.height;
 
         element.style.display = 'inline-block';
         element.style.textAlign = 'center';

@@ -1,0 +1,108 @@
+
+html[data-theme="dark"] {
+    --copy-inline-button-hover-bg-color: rgba(89, 89, 89, 0.23);
+    --url-element-hover-bg-color: rgba(89, 89, 89, 0.23);
+    --success: #22c55e; /* Зеленый для успеха */
+    --danger: #ef4444; /* Красный для опасности */
+    --warning: #f59e0b; /* Оранжевый для предупреждения */
+    --info: #3b82f6; /* Синий для информации */
+    --accent: #fae770;
+
+}
+
+html[data-theme="light"], :root {
+    --copy-inline-button-hover-bg-color: rgba(236, 236, 236, 0.55);
+    --url-element-hover-bg-color: rgba(236, 236, 236, 0.55);
+    --success: #16a34a; /* Темно-зеленый для светлой темы */
+    --danger: #dc2626; /* Темно-красный для светлой темы */
+    --warning: #d97706; /* Темно-оранжевый для светлой темы */
+    --info: #2563eb; /* Темно-синий для светлой темы */
+    --accent: #f6de2e;
+}
+
+@media (prefers-color-scheme: dark) {
+    html[data-theme="auto"] {
+        --copy-inline-button-hover-bg-color: rgba(89, 89, 89, 0.23);
+        --url-element-hover-bg-color: rgba(89, 89, 89, 0.23);
+        --success: #22c55e; /* Зеленый для успеха */
+        --danger: #ef4444; /* Красный для опасности */
+        --warning: #f59e0b; /* Оранжевый для предупреждения */
+        --info: #3b82f6; /* Синий для информации */
+        --accent: #fae770;
+    }
+}
+
+.copy-inline-button {
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 3px;
+    transition: background-color 0.2s ease, opacity 0.3s ease;
+    display: inline-block;
+}
+
+.copy-inline-button:hover {
+    background-color: var(--copy-inline-button-hover-bg-color);
+}
+
+.copy-inline-button:not(.copying):active {
+    background-color: var(--accent);
+}
+
+.copy-inline-button.copying {
+    text-transform: uppercase;
+    border-radius: 5px;
+    padding: 1px 7px;
+    margin: 0 2px;
+    border: 1px solid var(--success);
+    color: var(--success);
+}
+
+.url-element {
+    cursor: pointer;
+}
+
+.url-element:hover {
+    background-color: var(--url-hover-color, var(--url-element-hover-bg-color));
+    border-radius: 5px;
+}
+
+
+span.outline-badge {
+    text-transform: uppercase;
+    font-size: 12px;
+    border-radius: 5px;
+    padding: 1px 7px;
+    margin: 0 2px;
+}
+
+span.outline-badge.large {
+    font-size: 16px;
+    border-radius: 7px;
+    padding: 1px 7px;
+    margin: 0 2px;
+}
+
+
+span.outline-badge.success {
+    border: 1px solid var(--success);
+    color: var(--success);
+    background-color: transparent;
+}
+
+span.outline-badge.danger {
+    border: 1px solid var(--danger);
+    color: var(--danger);
+    background-color: transparent;
+}
+
+span.outline-badge.warning {
+    border: 1px solid var(--warning);
+    color: var(--warning);
+    background-color: transparent;
+}
+
+span.outline-badge.info {
+    border: 1px solid var(--info);
+    color: var(--info);
+    background-color: transparent;
+}
