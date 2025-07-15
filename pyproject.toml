@@ -1,8 +1,22 @@
 [project]
-name = "django-admin-helpers"
+name = "admin-dj-helpers"
 version = "0.1.0"
 description = "Add your description here"
+
+authors = [
+    { name = "Mikhail B", email = "mikhail@devilweb.ru" }
+]
 requires-python = ">=3.9"
 dependencies = [
     "django>=3.2",
 ]
+
+[tool.uv.build-backend]
+source-include = ["templates/**", "static/**"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/admin_helpers"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

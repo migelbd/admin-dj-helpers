@@ -1,0 +1,68 @@
+{% extends "admin/base.html" %}
+{% load static i18n %}
+
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+<div id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a></div>
+{% if user.is_anonymous %}
+  {% include "admin/color_theme_toggle.html" %}
+{% endif %}
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block extrastyle %}
+    {{ block.super }}
+{#    <link rel="stylesheet" type="text/css" href="{% static "admin/css/admin-extra.css" %}"/>#}
+    <!-- Font Awesome -->
+    <link href="{% static 'admin_helpers/fontawesome/css/fontawesome.css' %}" rel="stylesheet"/>
+    <link href="{% static 'admin_helpers/fontawesome/css/brands.css' %}" rel="stylesheet"/>
+    <link href="{% static 'admin_helpers/fontawesome/css/solid.css' %}" rel="stylesheet"/>
+    <!-- Toastify -->
+    <link rel="stylesheet" type="text/css" href="{% static 'admin_helpers/toastify/toastify.min.css' %}">
+
+{% endblock %}
+{% block extrahead %}
+    <script>
+        {% if admin_helpers_settings.IS_GLOBAL_SEARCH_ENABLED %}
+            const $djangoCurrentObject = {
+                object_id: '{{ object_id }}',
+                model_name: '{{ opts.app_label }}.{{ opts.model_name }}'
+            }
+            const $searchURLs = {
+                searchUrl: '{% url 'global_search:global_search' %}',
+                getModelsUrl: '{% url 'global_search:get_global_search_models' %}',
+            }
+        {% endif %}
+
+        {% if admin_helpers_settings.IS_OBJECT_ACTION_ENABLED %}
+            const $staticURLs = {
+                warningIcon: '{% static 'object_actions/img/warning.svg' %}',
+                infoIcon: '{% static 'object_actions/img/info.svg' %}',
+            }
+            const $actionsURLs = {
+                getModelActions: '{% url 'object_actions:get_model_actions' 'MODEL_NAME' %}',
+                executeModelAction: '{% url 'object_actions:execute_model_action' 'MODEL_NAME' 'OBJECT_ID' 'ACTION_ID' %}',
+                downloadTmpFile: '{% url 'object_actions:download_tmp_file' 'FILE_ID' %}',
+            }
+        {% endif %}
+    </script>
+    <script src="{% static 'admin_helpers/js/popperjs_core.js' %}"></script>
+    <script src="{% static 'admin_helpers/js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'admin_helpers/js/copy_btn.js' %}"></script>
+
+    <!-- Toastify -->
+    <script type="text/javascript" src="{% static 'admin_helpers/toastify/toastify.js' %}"></script>
+
+    {% if admin_helpers_settings.IS_GLOBAL_SEARCH_ENABLED %}
+    	<script src="{% static 'global_search/js/global_search.js' %}"></script>
+    {% endif %}
+    {% if admin_helpers_settings.IS_OBJECT_ACTION_ENABLED %}
+    	<script src="{% static 'object_actions/js/model_actions.js' %}"></script>
+    {% endif %}
+
+
+
+{% endblock %}
